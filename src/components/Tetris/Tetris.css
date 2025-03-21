@@ -1,0 +1,26 @@
+.Tetris {
+  position: relative;
+  display: flex;
+  justify-content: flex;
+  align-items: center;
+
+}
+
+
+.Tetris aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.main-title {
+  text-align: center;
+  color: #fff;
+  font-size: 10rem;
+}
+
+.main-title::first-letter {
+  color: #FEC53A;
+}
