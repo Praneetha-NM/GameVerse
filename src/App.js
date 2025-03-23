@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     if (isLoggedIn === true && token)
       getUser(token);
-  }, [isLoggedIn, token]);
+  }, [isLoggedIn, token,getUser]);
 
 
   gapi.load("client:auth2", () => {

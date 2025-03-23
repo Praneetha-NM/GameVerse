@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import './CandyCrush.css'
 
 import blue from '../../assets/candies/blue.webp'
@@ -38,7 +38,7 @@ const CandyCrush = () => {
         setcurrentColorArrangement(randomColorArrangement)
     }
 
-    const checkForCol3 = () => {
+    const checkForCol3 = useCallback(() => {
         for (let i = 0; i <= 47; i++) {
             const colOf3 = [i, i + WIDTH, i + WIDTH * 2];
             const decidedColor = currentColorArrangement[i];
@@ -50,9 +50,9 @@ const CandyCrush = () => {
                 return true;
             }
         }
-    }
+    },[currentColorArrangement])
 
-    const checkForCol4 = () => {
+    const checkForCol4 = useCallback(() => {
         for (let i = 0; i <= 39; i++) {
             const colOf4 = [i, i + WIDTH, i + WIDTH * 2, i + WIDTH * 3];
             const decidedColor = currentColorArrangement[i];
@@ -64,9 +64,9 @@ const CandyCrush = () => {
                 return true;
             }
         }
-    }
+    },[currentColorArrangement])
 
-    const checkForRow3 = () => {
+    const checkForRow3 = useCallback(() => {
         for (let i = 0; i < 64; i++) {
             const rowOf3 = [i, i + 1, i + 2];
             const decidedColor = currentColorArrangement[i];
@@ -82,9 +82,9 @@ const CandyCrush = () => {
                 return true;
             }
         }
-    }
+    },[currentColorArrangement])
 
-    const checkForRow4 = () => {
+    const checkForRow4 = useCallback(() => {
         for (let i = 0; i < 39; i++) {
             const rowOf4 = [i, i + 1, i + 2, i + 3];
             const decidedColor = currentColorArrangement[i];
@@ -100,9 +100,9 @@ const CandyCrush = () => {
                 return true;
             }
         }
-    }
+    },[currentColorArrangement])
 
-    const moveIntoSquareBelow = () => {
+    const moveIntoSquareBelow = useCallback(() => {
         for (let i = 0; i <= 64 - WIDTH; i++) {
             const firstRow = [0, 1, 2, 3, 4, 5, 6, 7]
             const isFirstRow = firstRow.includes(i)
@@ -117,7 +117,7 @@ const CandyCrush = () => {
                 currentColorArrangement[i] = blank
             }
         }
-    }
+    },[currentColorArrangement])
 
     const dragStart = (e) => {
         setBeingDragged(e.target)

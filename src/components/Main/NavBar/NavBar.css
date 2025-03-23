@@ -8,12 +8,12 @@ header {
 }
 
 .logo {
-    width: 20rem;
+    width: 23rem;
     height: 10vh;
     background: #550381;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     color: #fff;
     clip-path: polygon(0 0, 100% 0, 64% 100%, 0% 100%);
     padding: 10px;
@@ -57,4 +57,15 @@ header {
         width: 15rem;
         font-size: small;
     }
+}
+.login-link {
+    font-size: 14px;
+    color: #FFD700; /* Yellow */
+    text-decoration: none;
+    margin-top: 5px; /* Spacing below the title */
+    margin-left:10px;
+}
+
+.login-link:hover {
+    text-decoration: underline;
 }

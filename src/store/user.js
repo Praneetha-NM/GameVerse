@@ -20,6 +20,7 @@ const useUserStore = create(
             );
             set({ user: await response.json() });
         },
+        clearUser: () => set({ user: null, token: null }),
     })),
     {
         name: "user", // name of item in the storage (must be unique)

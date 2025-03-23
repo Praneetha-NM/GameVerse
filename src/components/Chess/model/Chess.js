@@ -10,9 +10,10 @@ import Square from './Square'
 class Game {
     constructor(thisPlayersColorIsWhite) {
         this.thisPlayersColorIsWhite = thisPlayersColorIsWhite // once initialized, this value should never change.
-        // console.log("this player's color is white: " + this.thisPlayersColorIsWhite) 
+        console.log("this player's color is white: " + this.thisPlayersColorIsWhite) 
         this.chessBoard = this.makeStartingBoard() // the actual chessBoard
         this.chess = new Chess()
+        this.isWhitesTurn = true;
 
         this.toCoord = thisPlayersColorIsWhite ? {
             0: 8, 1: 7, 2: 6, 3: 5, 4: 4, 5: 3, 6: 2, 7: 1
@@ -45,9 +46,9 @@ class Game {
         return this.chessBoard
     }
 
-    // nextPlayersTurn() {
-    //     this.isWhitesTurn = !this.isWhitesTurn
-    // }
+    nextPlayersTurn() {
+         this.isWhitesTurn = !this.isWhitesTurn
+     }
 
     setBoard(newBoard) {
         this.chessBoard = newBoard
@@ -82,6 +83,12 @@ class Game {
 
         if (y === to_y && x === to_x) {
             return "moved in the same position."
+        }
+
+        if (this.isWhitesTurn && pieceId[0] === 'b') {
+            return "It's White's turn!";
+        } else if (!this.isWhitesTurn && pieceId[0] === 'w') {
+            return "It's Black's turn!";
         }
 
         /**
@@ -255,7 +262,7 @@ class Game {
             move = this.toAlphabet[finalPosition[0]] + this.toCoord[finalPosition[1]]
         }
 
-        //  console.log("proposed move: " + move)
+        console.log("proposed move: " + move)
         return move
     }
 
@@ -287,9 +294,9 @@ class Game {
         }
         const whiteBackRankId = ["wr1", "wn1", "wb1", "wq1", "wk1", "wb2", "wn2", "wr2"]
         const blackBackRankId = ["br1", "bn1", "bb1", "bq1", "bk1", "bb2", "bn2", "br2"]
-        for (var j = 0; j < 8; j += 7) {
-            for (var i = 0; i < 8; i++) {
-                if (j == 0) {
+        for (j = 0; j < 8; j += 7) {
+            for (i = 0; i < 8; i++) {
+                if (j === 0) {
                     // top
                     // console.log(backRank[i])
                     startingChessBoard[j][this.thisPlayersColorIsWhite ? i : 7 - i].setPiece(new ChessPiece(backRank[i], false, this.thisPlayersColorIsWhite ? "black" : "white", this.thisPlayersColorIsWhite ? blackBackRankId[i] : whiteBackRankId[i]))

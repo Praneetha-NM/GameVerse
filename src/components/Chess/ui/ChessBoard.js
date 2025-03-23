@@ -32,7 +32,7 @@ const ChessBoard = (props) => {
             }
         })
 
-    }, [])
+    })
 
     const startDragging = (e) => {
         setdraggedPieceTargetId(e.target.attrs.id)

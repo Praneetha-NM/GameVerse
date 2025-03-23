@@ -50,7 +50,7 @@ const MainGame = () => {
 
         if (loading)
             updateScore();
-    }, [loading])
+    }, [loading,finalScore,getUser,navigate,token])
 
 
     const moveRacquet = (event) => racquetData.x = event.clientX - racquetData.width * 2;
@@ -131,7 +131,7 @@ const MainGame = () => {
             render();
         }
 
-    }, [ballData, brickData, playerData, racquetData, gameStart]);
+    }, [ballData, brickData, playerData, racquetData, gameStart,user.breakout.highScore,user.name]);
 
     if (loading)
         return <Loader />

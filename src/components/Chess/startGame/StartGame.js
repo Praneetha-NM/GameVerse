@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef} from 'react'
 import './StartGame.css'
 import { v4 as uuidv4 } from 'uuid';
 import { ColorContext } from '../context/colorContext'
@@ -12,7 +12,6 @@ const socket = require('../apis/scoket').socket
 
 const StartGame = () => {
     const user = useUserStore(state => state.user)
-    const [gameId, setGameId] = useState("")
     const navigate = useNavigate()
     const colorCtx = useContext(ColorContext)
     const textRef = useRef(null)
@@ -30,7 +29,6 @@ const StartGame = () => {
     const newGameHandler = () => {
         colorCtx.playerDidRedirect();
         const newGameRoomId = uuidv4();
-        setGameId(newGameRoomId)
         socket.emit('createNewGame', newGameRoomId)
         JoinGameRoom(newGameRoomId, user.name, true)
         navigate(`/chess?id=${newGameRoomId}`)

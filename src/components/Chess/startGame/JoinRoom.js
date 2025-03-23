@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import JoinGame from './JoinGame'
 import ChessGame from '../ui/ChessGame'
 
 import rook from '../assets/rook.png'
@@ -21,7 +20,6 @@ const JoinRoom = () => {
         <>
             {didGetUserName ?
                 <div className='start-container'>
-                    <JoinGame userName={inputText} isCreator={false} />
                     <ChessGame myUserName={inputText} />
                 </div> :
                 <div className='start-container'>

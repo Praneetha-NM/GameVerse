@@ -3,7 +3,6 @@ import React from 'react'
 import { ColorContext } from './context/colorContext'
 import StartGame from './startGame/StartGame';
 import useUserStore from '../../store/user'
-import JoinGame from './startGame/JoinGame'
 import ChessGame from './ui/ChessGame';
 import NavBar from '../Main/NavBar/NavBar'
 const App = () => {
@@ -24,7 +23,6 @@ const App = () => {
         <ColorContext.Provider value={{ didRedirect: didRedirect, playerDidRedirect: playerDidRedirect, playerDidNotRedirect: playerDidNotRedirect }}>
             {didRedirect ? (
                 <div className='start-container'>
-                    <JoinGame userName={userName} isCreator={true} />
                     <ChessGame myUserName={userName} />
                 </div>
             ) : (

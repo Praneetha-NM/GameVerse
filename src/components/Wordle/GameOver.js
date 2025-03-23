@@ -14,30 +14,44 @@ const GameOver = () => {
 
     useEffect(() => {
         const updateScore = async () => {
-            const res = await fetch(`${process.env.REACT_APP_BASE_URL}/update-score`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer :${token}`,
-                },
-                body: JSON.stringify(data),
-            });
-
-            getUser(token)
-
-            setLoading(false);
-            if (res.status === 200) {
-                navigate("/wordle");
-            } else {
-                alert("Could Not Save Scores ");
+            console.log("🔹 Sending token:", token); // Debugging
+            console.log(process.env.REACT_APP_BASE_URL);
+            try {
+                const res = await fetch(`${process.env.REACT_APP_BASE_URL}/update-score`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(data),
+                });
+    
+                if (res.status === 403) {
+                    console.error("❌ Forbidden: Invalid Token");
+                    alert("Session expired. Please log in again.");
+                    navigate("/login");
+                    return;
+                }
+    
+                if (res.ok) {
+                    getUser(token);
+                    navigate("/wordle");
+                } else {
+                    console.error("❌ Error updating score:", await res.text());
+                    alert("Could not save scores.");
+                }
+            } catch (error) {
+                console.error("❌ Network error:", error);
+                alert("Network error. Try again later.");
+            } finally {
+                setLoading(false);
             }
-        }
-
-        if (data !== null)
-            updateScore()
-
-    }, [data])
-
+        };
+    
+        if (data !== null) updateScore();
+    }, [data]);
+    
+    
     if (loading)
         return <Loader />
 

@@ -47,7 +47,7 @@ const Counter = ({ score }) => {
 
         if (loading)
             updateScore();
-    }, [loading])
+    }, [loading,getUser,navigate,score,token])
 
     useEffect(() => {
 

@@ -3,8 +3,8 @@ import { boardDefault } from '../../utils/Wordle'
 import Board from './Board'
 import KeyBoard from './KeyBoard'
 import './Wordle.css'
-import wordBank from "../../utils/WordBank.txt";
 import GameOver from './GameOver'
+import wordBank from '../../utils/WordBank.txt'
 
 export const BoardContext = createContext()
 
@@ -19,19 +19,24 @@ const Wordle = () => {
     })
     const [correctWord, setCorrectWord] = useState("");
 
-    const generateWordSet = async () => {
-        await fetch(wordBank)
-            .then((response) => response.text())
-            .then((result) => {
-                const wordArr = result.split("\r\n");
-                setCorrectWord(wordArr[Math.floor(Math.random() * wordArr.length)]);
-                setWordSet(new Set(wordArr));
-            });
-    };
-
     useEffect(() => {
-        generateWordSet();
-    }, [])
+        fetch(wordBank)
+          .then(response => response.text())
+          .then(text => {
+            const wordArray = text.split(/\r?\n/).map(word => word.trim().toLowerCase());
+            const wordSet = new Set(wordArray);
+            setWordSet(wordSet);
+      
+            // Pick a random word
+            const randomWord = wordArray[Math.floor(Math.random() * wordArray.length)];
+            setCorrectWord(randomWord);
+      
+            console.log("Word Set Loaded:", wordSet);
+            console.log("Selected Random Word:", randomWord);
+          })
+          .catch(error => console.error("Error loading wordbank.txt:", error));
+      }, []);
+      
 
     return (
         <div className='wordle'>

@@ -31,7 +31,7 @@ const Stats = ({ score, loading }) => {
 
         if (loading)
             updateScore();
-    }, [loading])
+    }, [loading,getUser,navigate,score,token])
 
     if (loading)
         return <Loader />

@@ -25,26 +25,30 @@ export default class Game extends Component {
 	}
 
 	handleKeyPress(event) {
-		//Left arrow
-		if (event.key === "ArrowLeft") {
-			this.state.dashboard = this.movesCombinesLeft(this.state.dashboard)
-		} else if (event.keyCode === 38) {
-			//Up arrow
-			let auxiliar_dashboard = this.transposeDashboard(this.state.dashboard);
+		this.setState((prevState) => {
+		  let newDashboard = [...prevState.dashboard]; // Create a copy of the state to avoid mutation
+	  
+		  if (event.key === "ArrowLeft") {
+			newDashboard = this.movesCombinesLeft(newDashboard);
+		  } else if (event.keyCode === 38) {
+			// Up arrow
+			let auxiliar_dashboard = this.transposeDashboard(newDashboard);
 			auxiliar_dashboard = this.movesCombinesLeft(auxiliar_dashboard);
-			this.state.dashboard = this.transposeDashboard(auxiliar_dashboard)
-		} else if (event.keyCode === 39) {
-			//Right arrow
-			this.state.dashboard = this.movesCombinesRight(this.state.dashboard)
-		} else if (event.keyCode === 40) {
-			//Down arrow
-			let auxiliar_dashboard = this.transposeDashboard(this.state.dashboard);
+			newDashboard = this.transposeDashboard(auxiliar_dashboard);
+		  } else if (event.keyCode === 39) {
+			// Right arrow
+			newDashboard = this.movesCombinesRight(newDashboard);
+		  } else if (event.keyCode === 40) {
+			// Down arrow
+			let auxiliar_dashboard = this.transposeDashboard(newDashboard);
 			auxiliar_dashboard = this.movesCombinesRight(auxiliar_dashboard);
-			this.state.dashboard = this.transposeDashboard(auxiliar_dashboard)
-		}
-
-		this.newNumber();
-	}
+			newDashboard = this.transposeDashboard(auxiliar_dashboard);
+		  }
+	  
+		  return { dashboard: newDashboard };
+		}, this.newNumber); // Call `newNumber` after state update
+	  }
+	  
 
 	//Moves to the left, combine and moves to the left again
 	movesCombinesLeft = (dashboard) => {
