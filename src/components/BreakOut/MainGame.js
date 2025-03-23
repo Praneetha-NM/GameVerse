@@ -85,9 +85,9 @@ const MainGame = () => {
 
             if (gameStart && playerData.lives === 0) {
                 setFinalScore(playerData.score)
-                // alert(`GAMEOVER! You scored ${playerData.score} points`);
+                 alert(`GAMEOVER! You scored ${playerData.score} points`);
                 setGameOver(true)
-                // setGameStart(false);
+                 setGameStart(false);
                 playerData.lives = 3;
                 playerData.level = 1;
                 playerData.score = 0;
@@ -123,8 +123,8 @@ const MainGame = () => {
             Racquet(ctx, canvas, racquetData);
             RacquetHit(ballData, racquetData);
             requestAnimationFrame(render);
-            ctx.fillText(`Player Name : ${user.name}`, 200, 30)
-            ctx.fillText(`HighScore : ${user.breakout.highScore}`, 800, 30)
+            ctx.fillText(`Player Name : ${user.name}`, 230, 30)
+            ctx.fillText(`HighScore : ${user.breakout.highScore}`, 590, 30)
         };
 
         if (gameStart) {

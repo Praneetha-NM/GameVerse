@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import NavBar from '../Main/NavBar/NavBar'
+import './Main.css'
 
 const Scoring = () => {
     return (
@@ -14,7 +15,9 @@ const Scoring = () => {
                 <h3>The user's score starts at zero, and is increased whenever two tiles combine, by the value of the new tile</h3>
                 <h3>Use Your Arrow Keys To Move The Tiles</h3>
                 <br></br>
-                <Link to='/2048'>Start Game</Link>
+                <div className='link-button'>
+                <Link to='/2048' >Start Game</Link>
+                </div>
             </div>
         </>
     )

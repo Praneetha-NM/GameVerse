@@ -12,11 +12,10 @@ const data = {
         y: 50,
         height: 20,
         density: 2,
-        colors: ["red", "lime"],
+        colors: ["red", "lightblue"],
     },
     playerData: {
         name: "Breakout!",
-        link: "https://github.com/safwbdev/breakout-react",
         lives: 3,
         score: 0,
         level: 1,

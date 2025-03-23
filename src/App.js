@@ -10,13 +10,9 @@ import LeaderBoard from './components/Main/LeaderBoard/LeaderBoard';
 import Main from './components/Main/Main';
 import Wordle from './components/Wordle/Wordle';
 import Main2048 from './components/2048/Main2048';
-
-import CCScores from './components/CandyCrush/CCScores';
-import CandyCrush from './components/CandyCrush/CandyCrush';
 import WordleScore from './components/Wordle/WordleScore';
 import Game from './components/Tetris/Game'
 import MainGame from './components/BreakOut/MainGame'
-import ChessGame from './components/Chess/ChessGame'
 import Scoring from './components/2048/Scoring';
 
 function App() {
@@ -41,15 +37,12 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/leaderboard" element={<LeaderBoard />}></Route>
-        <Route path="/candy-crush" element={isLoggedIn ? <CCScores /> : <Navigate to="/login" />}></Route>
-        <Route path="/candy-crush/game" element={isLoggedIn ? <CandyCrush /> : <Navigate to="/login" />}></Route>
         <Route path="/wordle" element={isLoggedIn ? <WordleScore /> : <Navigate to="/login" />}></Route>
         <Route path="/wordle/game" element={isLoggedIn ? <Wordle /> : <Navigate to="/login" />}></Route>
         <Route path="/tetris" element={isLoggedIn ? <Game rows={20} columns={10} /> : <Navigate to="/login" />}></Route>
         <Route path="/2048" element={isLoggedIn ? <Main2048 /> : <Navigate to="/login" />}></Route>
         <Route path="/2048/rules" element={isLoggedIn ? <Scoring /> : <Navigate to="/login" />}></Route>
         <Route path="/breakout" element={isLoggedIn ? <MainGame /> : <Navigate to="/login" />}></Route>
-        <Route path="/chess" element={isLoggedIn ? <ChessGame /> : <Navigate to="/login" />}></Route>
       </Routes>
     </>
   );

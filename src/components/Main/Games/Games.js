@@ -1,11 +1,7 @@
 import React from 'react'
 import './Games.css'
-import candycrush from '../../../assets/home/candycrush.jpg'
-import chess from '../../../assets/home/chess.jpg'
 import wordle from '../../../assets/home/wordle.jpg'
-import ttt from '../../../assets/home/ttt.jpg'
 import bkout from '../../../assets/home/breakout.png'
-import mario from '../../../assets/home/mario.gif'
 import tetris from '../../../assets/home/tetris.jpg'
 import tofe from '../../../assets/home/2048.jpg'
 import { useNavigate } from 'react-router-dom'
@@ -16,32 +12,6 @@ const Games = () => {
     return (
         <div className="section-3" id="games">
             <div className="section-3-wrapper">
-                <div className='feedback-box'>
-                    <div className="feedback">
-                        <img alt="Game" src={chess}></img>
-                    </div>
-                    <div className="feedback-desc">
-                        <h2>CHESS</h2>
-                        <br />
-                        <p>Play chess against family and friends right now! A fun new way to play chess and video-chat at the same time! Ready to be played worldwide.</p>
-                        <br />
-                        <h4 onClick={() => { navigate('/chess') }}>Click Here To Play Now</h4>
-                    </div>
-                </div>
-
-                <div className='feedback-box'>
-                    <div className="feedback">
-                        <img alt="Game" src={candycrush} />
-                    </div>
-                    <div className="feedback-desc">
-                        <h2>CANDY CRUSH</h2>
-                        <br />
-                        <p>Shift the treats around the board to make matches based on color and shape. Form lines of 3 or more identical tiles to crush them. The larger the combos, the more points you earn!</p>
-                        <br />
-                        <h4 onClick={() => { navigate('/candy-crush') }}>Click Here To Play Now</h4>
-                    </div>
-                </div>
-
                 <div className='feedback-box'>
                     <div className="feedback">
                         <img alt="Game" src={wordle}></img>

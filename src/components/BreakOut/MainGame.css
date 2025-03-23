@@ -13,7 +13,7 @@
     background-color: #000000;
     border-radius: 20px;
     cursor: none;
-    border: 2px solid lime;
+    border: 2px solid blueviolet;
 }
 
 .GameStartWindow {
@@ -31,21 +31,21 @@
 .GameStartWindow button {
     font-family: 'Press Start 2P', cursive;
     text-transform: uppercase;
-    color: lime;
+    color: blueviolet;
     background: transparent;
-    border: 2px solid lime;
+    border: 2px solid blueviolet;
     border-radius: 10px;
     padding: 1em;
     cursor: pointer;
 }
 
 .GameStartWindow .GameStartInner {
-    border: 2px solid lime;
+    border: 2px solid blueviolet;
     font-family: 'Press Start 2P', cursive;
     text-transform: uppercase;
     background: black;
     border-radius: 20px;
-    color: lime;
+    color: lightblue;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@
 }
 
 .ghLink a {
-    color: lime;
+    color: blueviolet;
     text-decoration: none;
 }
 

@@ -32,18 +32,20 @@
     
 }
 .btn {
-    background-color: #ffcc00;
-    color: black;
+    background-color: black;
+    color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 20px 20px;
     cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
     margin-left:5px;
+    max-height: 260px;
+    margin-top: 100px;
 }
 
 .btn:hover {
-    background-color: #e6b800;
+    background-color: #1a1a1a;
 }
 
 .user-info {

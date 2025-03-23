@@ -12,7 +12,7 @@ const NavBar = () => {
             }}>
                 <ion-icon name="game-controller"></ion-icon>
                 <div style={{display:"block"}}>
-                <p>The Game Zone</p>
+                <p>GameVerse</p>
                 </div>
                 
             </div>

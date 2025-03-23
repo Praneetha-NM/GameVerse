@@ -10,10 +10,10 @@ export class Ball {
 
     draw(ctx) {
         ctx.beginPath();
-        ctx.fillStyle = "lime";
+        ctx.fillStyle = "blue";
         ctx.arc(this.x, this.y, this.rad, 0, 2 * Math.PI);
-        ctx.strokeStyle = "lime";
-        ctx.strokeWidth = 4;
+        ctx.strokeStyle = "blue";
+        ctx.strokeWidth = 1;
         ctx.fill();
         ctx.stroke();
     }

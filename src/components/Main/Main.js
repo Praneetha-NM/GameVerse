@@ -3,9 +3,9 @@ import Hero from './Hero/Hero'
 import NavBar from './NavBar/NavBar'
 import './Main.css'
 import bg from '../../assets/home/bg.png'
+import bg2 from '../../assets/home/GAMEVERSE.jpg'
 import Footer from './Footer/Footer'
 import Games from './Games/Games'
-
 import { useEffect } from 'react';
 import { Link,useNavigate } from 'react-router-dom'
 import useUserStore from '../../store/user';
@@ -65,23 +65,31 @@ const Main = () => {
         <>
             <div className='container'
                 style={{ background: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(${bg})`,color:'white' }}>
-                <NavBar />
                 {token ? (
-                            <div className="user-info">
-                                <span className="username">Hey, {user.name} 👋</span>
-                                <span className="btn" onClick={handleLogout}> Want to Logout ?</span>
-                            </div>
-                        ) : (
-                            <Link to="/login" className="btn">Click Here to Login</Link>
-                        )}
-                <Hero />
+                <>
+                    <NavBar />
+                    
+                    <Hero username={user.name} handleLogout={handleLogout}/>
+                    <div className="logo-section">
+                        <ion-icon name="game-controller"></ion-icon>
+                        <h1>The Game Zone</h1>
+                    </div>
+                    <Games />
+                    <Footer />
+                </> ) : (
+                    <div style={{ background: `linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)), url(${bg2})`,color:'white' ,backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    height: "100vh",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    }}>
+                        <div style={{marginTop :"160px"}}>
+                        <Link to="/login" className="btn" style={{height : '100px'}}>Click Here to Login</Link>
+                        </div>
+                    </div>
+                )}
             </div>
-            <div className="logo-section">
-                <ion-icon name="game-controller"></ion-icon>
-                <h1>The Game Zone</h1>
-            </div>
-            <Games />
-            <Footer />
         </>
     )
 }

@@ -17,7 +17,9 @@ const WordleScore = () => {
                 <h3>If you guess in 4 try , you get 2 points</h3>
                 <h3>If you guess in 5 try , you get 1 points</h3>
                 <br></br>
-                <Link to='game'>Start Game</Link>
+                <div className='link-button'>
+                    <Link to='game'>Start Game</Link>
+                </div>
             </div>
         </>
     )

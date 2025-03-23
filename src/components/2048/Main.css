@@ -563,3 +563,37 @@
 (-o-min-device-pixel-ratio: 5/4),
 (-webkit-min-device-pixel-ratio: 1.25),
 (min-resolution: 120dpi) {}
+
+.scoring {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    height: 100vh; /* Center vertically */
+    color: yellow; /* Default text color */
+}
+
+.scoring h1 {
+    color: white; /* White color for h1 */
+}
+
+.scoring h3 {
+    color: yellow; /* Yellow color for h3 */
+}
+
+.scoring .link-button{
+    display: inline-block; 
+    background-color: white; /* White button */
+    color: black; /* Black text */
+    padding: 10px 20px;
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-weight: bold;
+    margin-top: 10px; /* Space between text and button */
+}
+
+.scoring .link-button:hover {
+    background-color: black;
+    color: white;
+}
