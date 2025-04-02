@@ -1,0 +1,39 @@
+.Menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .Button {
+    padding: 20px 20px;
+    font-size: 2em;
+    border-radius: 10px;
+    text-transform: capitalize;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 60px;
+    cursor: pointer;
+  }
+  .scoring h1 {
+    color: white; /* White color for h1 */
+}
+
+.scoring h3 {
+    color: yellow; /* Yellow color for h3 */
+}
+
+.scoring button{
+    display: inline-block; 
+    background-color: white; /* White button */
+    color: black; /* Black text */
+    padding: 10px 20px;
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-weight: bold;
+    margin-top: 10px; /* Space between text and button */
+}
+
+.scoring button:hover {
+    background-color: black;
+    color: white;
+}
