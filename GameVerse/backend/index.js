@@ -26,15 +26,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(routes);
 
-// if (
-//   process.env.NODE_ENV === "production" ||
-//   process.env.NODE_ENV === "staging"
-// ) {
-//   app.use(express.static("frontend/build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-//   });
-// }
 
 const httpServer = app.listen(port, () => { console.log(`Server listening on port ${port}`) });
 const io = socketio(httpServer,{

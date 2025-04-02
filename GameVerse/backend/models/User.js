@@ -8,9 +8,7 @@ const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        validate(value) {
-            if (!value) throw new Error(`Name field is required.`);
-        },
+        required: true
     },
     email: {
         type: String,
@@ -33,28 +31,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: 'https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png'
     },
-    chess: {
-        Played: { type: Number, default: 0 },
-        Wins: { type: Number, default: 0 },
-        Losses: { type: Number, default: 0 },
-    },
-    candyCrush: {
+    breakout: {
         points: { type: Number, default: 0 },
         highScore: { type: Number, default: 0 },
     },
     wordle: {
-        points: { type: Number, default: 0 },
-        highScore: { type: Number, default: 0 },
-    },
-    ticTacToe: {
-        points: { type: Number, default: 0 },
-        highScore: { type: Number, default: 0 },
-    },
-    mario: {
-        points: { type: Number, default: 0 },
-        highScore: { type: Number, default: 0 },
-    },
-    breakout: {
         points: { type: Number, default: 0 },
         highScore: { type: Number, default: 0 },
     },
@@ -63,7 +44,7 @@ const UserSchema = new mongoose.Schema({
         highScore: { type: Number, default: 0 },
         maxLevelReached: { type: Number, default: 0 }
     },
-    tzfe: {
+    tzfe: {  // 2048 game
         points: { type: Number, default: 0 },
         highScore: { type: Number, default: 0 },
     },
@@ -81,6 +62,7 @@ const UserSchema = new mongoose.Schema({
     ],
 });
 
+// Generate Authentication Token
 UserSchema.methods.generateAuthToken = async function () {
     try {
         if (this.tokens.length > 1) this.tokens.splice(0, 1);
@@ -93,6 +75,6 @@ UserSchema.methods.generateAuthToken = async function () {
     }
 };
 
-const User = new mongoose.model("gamezone-user", UserSchema);
+const User = mongoose.model("gamezone-user", UserSchema);
 
 module.exports = User;

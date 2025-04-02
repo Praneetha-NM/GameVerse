@@ -12,16 +12,18 @@ import useUserStore from '../../store/user';
 
 const Main = () => {
     const navigate = useNavigate();
-    const { token, user, setUser, clearUser } = useUserStore(state => ({
+    const { token, user, setDetails, clearUser } = useUserStore(state => ({
         token: state.token,
         user: state.user,
-        setUser: state.setUser,
+        setDetails: state.setDetails, // ✅ Use setDetails instead of setUser
         clearUser: state.clearUser
     }));
+    
 
 
     // Fetch user details from the server if logged in
     useEffect(() => {
+        console.log("Current Token:", token);
         const fetchUser = async () => {
             if (!token) return;
             try {
@@ -33,7 +35,7 @@ const Main = () => {
 
                 if (res.ok) {
                     const data = await res.json();
-                    setUser(data, token); // Store user details in Zustand
+                    setDetails({user:data, token}); // ✅ Use setDetails instead of setUser
                 } else {
                     console.error("Failed to fetch user details");
                 }
@@ -43,7 +45,8 @@ const Main = () => {
         };
 
         fetchUser();
-    }, [token, setUser]);
+    }, [token, setDetails]); // ✅ Use setDetails in dependencies
+
 
     // Logout function
     const handleLogout = async () => {

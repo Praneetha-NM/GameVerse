@@ -5,21 +5,27 @@ const auth = require("../middleware/auth");
 
 router.post("/login", async (req, res) => {
     try {
-        const user_exists = await User.findOne({ email: req.body.email })
-        if (user_exists)
-            return res.status(200).send({ user: user_exists, token: user_exists.tokens[0].token })
+        const user_exists = await User.findOne({ email: req.body.email });
 
-        var user = new User(req.body)
+        if (user_exists) {
+            const existingToken = user_exists?.tokens?.length ? user_exists.tokens[0].token : null;
+            return res.status(200).json({ user: user_exists, token: existingToken });
+        }
+
+        var user = new User(req.body);
         const token = await user.generateAuthToken();
         const saved_user = await user.save();
-        console.log(saved_user)
-        res.status(200).send({ user: saved_user, token })
-    }
+
+        console.log(saved_user);
+        return res.status(200).json({ user: saved_user, token });
+    } 
     catch (e) {
         console.log(e);
-        res.status(400).send(e);
+        return res.status(400).json({ error: e.message });
     }
 });
+
+
 
 router.get("/user-detail", auth, async (req, res) => {
     try {
@@ -46,13 +52,12 @@ router.get("/scores", async (req, res) => {
 router.post("/update-score", auth, async (req, res) => {
     try {
         const user = await User.findOne({ email: req.email })
-
-        if (req.body.game === 'CC') {
-            user.candyCrush.points += req.body.score
-            user.candyCrush.highScore = Math.max(user.candyCrush.highScore, req.body.total)
-            user.total += req.body.score
+        console.log("Decoded email from token:", req.email);
+        console.log("Authorization Header:", req.headers.authorization);
+        if (!user) {
+            return res.status(404).json({ Error: "User not found. Check if the token contains the correct email." });
         }
-        else if (req.body.game === 'WDLE') {
+        if (req.body.game === 'WDLE') {
             var score = 6 - parseInt(req.body.score)
 
             user.wordle.points += score
@@ -68,7 +73,7 @@ router.post("/update-score", auth, async (req, res) => {
         }
         else if (req.body.game === '2048') {
             var score = parseInt(req.body.score)
-
+            console.log(score)
             user.tzfe.highScore = Math.max(user.tzfe.highScore, score);
             user.tzfe.points += score
             user.total += score
