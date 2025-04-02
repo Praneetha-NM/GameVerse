@@ -21,19 +21,26 @@ const Login = () => {
             },
             body: JSON.stringify(data),
         });
-
+    
         const res_data = await res.json();
-        console.log(res_data)
-        setDetails(res_data)    
-
+        console.log("✅ Backend Response:", res_data); // Check backend response
+    
+        if (!res_data.token) {
+            console.error("❌ Token is missing in response!");
+            return;
+        }
+    
+        // Flatten the structure before storing
+        setDetails({ user: res_data.user, token: res_data.token });
+    
         setLoading(false);
         if (res.status === 200) {
             navigate("/");
         } else {
-            alert("Could Not Sign In ");
+            alert("Could Not Sign In");
         }
-
-    }
+    };
+    
 
     useEffect(() => {
         if (data !== null)

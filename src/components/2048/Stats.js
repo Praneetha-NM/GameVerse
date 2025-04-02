@@ -11,27 +11,44 @@ const Stats = ({ score, loading }) => {
 
     useEffect(() => {
         const updateScore = async () => {
-            const res = await fetch(`${process.env.REACT_APP_BASE_URL}/update-score`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer :${token}`,
-                },
-                body: JSON.stringify({ game: '2048', score }),
-            });
-
-            getUser(token)
-
-            if (res.status === 200) {
-                navigate("/2048/rules");
-            } else {
-                alert("Could Not Save Scores ");
+            try {
+                console.log("Token being sent:", token);
+                console.log(atob(token.split(".")[1]));
+                console.log(process.env.REACT_APP_BASE_URL);
+                
+                const res = await fetch(`${process.env.REACT_APP_BASE_URL}/update-score`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,  // ✅ Ensure token is correct
+                    },
+                    
+                    body: JSON.stringify({ game: '2048', score }),
+                });
+        
+                const resData = await res.json(); // ✅ Get response data
+                console.log(resData)
+                console.log("Response Status:", res.status);
+                console.log("Response Data:", resData); // ✅ Log the error details
+        
+                await getUser(token);
+        
+                if (res.status === 200) {
+                    navigate("/2048/rules");
+                } else {
+                    alert(`Could Not Save Scores: ${resData.message || "Unknown Error"}`); // ✅ Show error message
+                }
+            } catch (error) {
+                console.error("Error updating score:", error);
             }
-        }
-
-        if (loading)
+        };
+        
+    
+        if (loading && typeof score === "number") {  // ✅ Ensure score is valid
             updateScore();
-    }, [loading,getUser,navigate,score,token])
+        }
+    }, [loading, getUser, navigate, score, token]);
+    
 
     if (loading)
         return <Loader />
