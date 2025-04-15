@@ -25,6 +25,7 @@ module.exports = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
+        console.error("Auth middleware error:", error);
         return res
             .status(403)
             .json({
