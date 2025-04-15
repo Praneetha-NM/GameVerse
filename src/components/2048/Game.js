@@ -102,7 +102,7 @@ export default class Game extends Component {
 	};
 
 	transposeDashboard = (dashboard) => {
-		var auxiliar_dashboard = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+		let auxiliar_dashboard = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
 		for (let i = 0; i < 4; i++) {
 			for (let j = 0; j < 4; j++) auxiliar_dashboard[i][j] = dashboard[j][i];
 		}
@@ -117,15 +117,15 @@ export default class Game extends Component {
 
 	//Restart the game
 	restartGame = () => {
-		var auxiliar_dashboard = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-		var randomNumber = Math.random() < 0.9 ? 2 : 4,
+		let auxiliar_dashboard = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+		let randomNumber = Math.random() < 0.9 ? 2 : 4,
 			randomNumber2 = Math.random() < 0.9 ? 2 : 4;
-		var randomPosition = Math.floor(Math.random() * auxiliar_dashboard.length),
+		let randomPosition = Math.floor(Math.random() * auxiliar_dashboard.length),
 			randomPosition2 = Math.floor(Math.random() * auxiliar_dashboard.length);
 
 		auxiliar_dashboard[randomPosition].splice(randomPosition2, 1, randomNumber);
 
-		var randomPosition3 = Math.floor(Math.random() * auxiliar_dashboard.length),
+		let randomPosition3 = Math.floor(Math.random() * auxiliar_dashboard.length),
 			randomPosition4 = Math.floor(Math.random() * auxiliar_dashboard.length);
 
 		auxiliar_dashboard[this.differentPosition(randomPosition, randomPosition3, auxiliar_dashboard.length)].splice(
@@ -160,7 +160,7 @@ export default class Game extends Component {
 
 	//Add new number to the game
 	newNumber = () => {
-		var auxDash = this.state.dashboard,
+		let auxDash = this.state.dashboard,
 			cellAvailableX = [],
 			cellAvailableY = [];
 
@@ -175,7 +175,7 @@ export default class Game extends Component {
 		var randomPosition = Math.floor(Math.random() * cellAvailableX.length);
 
 		if (cellAvailableX.length > 0) {
-			var auxiliar_dashboard_2 = this.makeCopy(this.state.dashboard);
+			let auxiliar_dashboard_2 = this.makeCopy(this.state.dashboard);
 			auxiliar_dashboard_2[cellAvailableX[randomPosition]][cellAvailableY[randomPosition]] =
 				Math.random() < 0.9 ? 2 : 4;
 			this.setState({
@@ -210,7 +210,7 @@ export default class Game extends Component {
 	};
 
 	makeCopy = (dashboard) => {
-		var auxiliar_dashboard = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+		let auxiliar_dashboard = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
 		for (let i = 0; i < 4; i++) {
 			for (let j = 0; j < 4; j++) auxiliar_dashboard[i][j] = dashboard[i][j];
 		}
