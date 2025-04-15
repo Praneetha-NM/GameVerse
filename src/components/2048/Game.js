@@ -59,7 +59,7 @@ export default class Game extends Component {
 
 	//Move all the zero to the Right side of the row
 	moveCellsLeft = (dashboard) => {
-		var auxDash = this.makeCopy(dashboard);
+		let auxDash = this.makeCopy(dashboard);
 		for (let i = 0; i < 4; i++) {
 			for (let j = 0; j < 4; j++) {
 				if (auxDash[i][j] === 0 && auxDash[i][j + 1] === 0) {
