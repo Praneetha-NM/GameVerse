@@ -2,6 +2,12 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useUserStore from '../../store/user'
 import Loader from '../Loader/Loader'
+import PropTypes from 'prop-types';
+
+Stats.propTypes = {
+    score: PropTypes.number.isRequired,     
+    loading: PropTypes.bool.isRequired     
+};
 
 const Stats = ({ score, loading }) => {
     const user = useUserStore((state) => state.user)
