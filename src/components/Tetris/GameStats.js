@@ -8,15 +8,11 @@ const GameStats = ({ gameStats }) => {
 
 
   return (
-    <>
-    <br></br>
-    <br></br>
       <div className="GameStats">
         <div className="value">LEVEL <span>{level}</span></div>
         <div className="value">Lines to level  <span>{linesToLevel}</span></div>
         <div className="value">Points <span>{points}</span></div>
       </div>
-    </>
   );
 };
 

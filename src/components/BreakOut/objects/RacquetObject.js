@@ -4,7 +4,6 @@ export class RacquetObject {
     height
     width
     colors;
-    // broke:boolean
     constructor(x, y, w) {
         this.x = x;
         this.y = y - 30;
@@ -18,7 +17,6 @@ export class RacquetObject {
         ctx.fillStyle = this.colors[1];
         ctx.strokeStyle = "blue";
         ctx.lineWidth = 1;
-        ctx.fillStyle = this.colors[1];
         ctx.shadowBlur = 0;
         ctx.strokeRect(this.x, this.y, this.width, this.height);
         ctx.fill();

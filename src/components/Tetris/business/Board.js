@@ -35,8 +35,6 @@ const findDropPosition = ({ board, position, shape }) => {
 export const nextBoard = ({ board, player, resetPlayer, addLinesCleared }) => {
   const { tetromino, position } = player;
 
-  // Copy and clear spaces used by pieces that
-  // hadn't collided and occupied spaces permanently
   let rows = board.rows.map((row) =>
     row.map((cell) => (cell.occupied ? cell : { ...defaultCell }))
   );

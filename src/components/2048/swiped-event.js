@@ -88,8 +88,8 @@
 
         if (!xDown || !yDown) return;
 
-        var xUp = e.touches[0].clientX;
-        var yUp = e.touches[0].clientY;
+        let xUp = e.touches[0].clientX;
+        let yUp = e.touches[0].clientY;
 
         xDiff = xDown - xUp;
         yDiff = yDown - yUp;

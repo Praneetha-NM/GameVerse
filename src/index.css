@@ -18,7 +18,6 @@ body {
 
 .container {
   width: 100%;
-  /* height: 100vh; */
   background-size:contain !important;
   background-position:center !important;
   background-attachment: fixed !important;

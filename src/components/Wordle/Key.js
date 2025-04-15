@@ -9,7 +9,7 @@ const Key = ({ val, bigKey, disabled }) => {
             if (currentAttempt.letterPos !== 5) return;
     
             let currWord = "";
-            for (var i = 0; i < 5; i++)
+            for (let i = 0; i < 5; i++)
                 currWord += board[currentAttempt.attempt][i];
     
             if (wordSet.has(currWord.toLowerCase())) {
@@ -19,7 +19,7 @@ const Key = ({ val, bigKey, disabled }) => {
     
                 // Reset the row
                 const newBoard = [...board];
-                for (var i = 0; i < 5; i++) newBoard[currentAttempt.attempt][i] = "";
+                for (let i = 0; i < 5; i++) newBoard[currentAttempt.attempt][i] = "";
     
                 setBoard(newBoard);
                 setCurrentAttempt({ ...currentAttempt, letterPos: 0 });  // Reset letterPos
