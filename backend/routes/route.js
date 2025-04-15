@@ -3,10 +3,17 @@ const router = new express.Router();
 const User = require('../models/User')
 const auth = require("../middleware/auth");
 
+// Input validation helper
+const isValidEmail = (email) => typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 router.post("/login", async (req, res) => {
     try {
+        const { email, ...rest } = req.body;
+        if (!isValidEmail(email)) {
+            return res.status(400).json({ error: "Invalid email format" });
+        }
         const user_exists = await User.findOne({ email: req.body.email });
-
+           
         if (user_exists) {
             const existingToken = user_exists?.tokens?.length ? user_exists.tokens[0].token : null;
             return res.status(200).json({ user: user_exists, token: existingToken });
@@ -39,8 +46,12 @@ router.get("/user-detail", auth, async (req, res) => {
 
 router.get("/scores", async (req, res) => {
     try {
-        const user = await User.find({}).sort({ total: -1 }).limit(50)
-        res.status(200).send(user)
+        const topUsers = await User.find({})
+            .sort({ total: -1 })
+            .limit(50)
+            .select('-password -tokens'); // Avoid exposing sensitive fields
+
+        res.status(200).send(topUsers)
     }
     catch (e) {
         console.log(e);
