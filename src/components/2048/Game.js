@@ -172,7 +172,7 @@ export default class Game extends Component {
 				}
 			}
 		}
-		var randomPosition = Math.floor(Math.random() * cellAvailableX.length);
+		let randomPosition = Math.floor(Math.random() * cellAvailableX.length);
 
 		if (cellAvailableX.length > 0) {
 			let auxiliar_dashboard_2 = this.makeCopy(this.state.dashboard);
