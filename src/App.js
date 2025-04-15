@@ -32,7 +32,6 @@ function App() {
   });
 
   return (
-    <>
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/login" element={<Login />}></Route>
@@ -44,7 +43,6 @@ function App() {
         <Route path="/2048/rules" element={isLoggedIn ? <Scoring /> : <Navigate to="/login" />}></Route>
         <Route path="/breakout" element={isLoggedIn ? <MainGame /> : <Navigate to="/login" />}></Route>
       </Routes>
-    </>
   );
 }
 
