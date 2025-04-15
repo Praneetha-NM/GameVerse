@@ -8,7 +8,7 @@ const isValidEmail = (email) => typeof email === 'string' && /^[^\s@]+@[^\s@]+\.
 
 router.post("/login", async (req, res) => {
     try {
-        const { email, ...rest } = req.body;
+        const { email } = req.body;
         if (!isValidEmail(email)) {
             return res.status(400).json({ error: "Invalid email format" });
         }
