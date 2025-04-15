@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const User = require('../models/User')
+const User = require('../models/User');
 const auth = require("../middleware/auth");
 
 // Input validation helper
@@ -12,33 +12,29 @@ router.post("/login", async (req, res) => {
         if (!isValidEmail(email)) {
             return res.status(400).json({ error: "Invalid email format" });
         }
-        const user_exists = await User.findOne({ email: req.body.email });
-           
+        const user_exists = await User.findOne({ email });
+
         if (user_exists) {
             const existingToken = user_exists?.tokens?.length ? user_exists.tokens[0].token : null;
             return res.status(200).json({ user: user_exists, token: existingToken });
         }
 
-        var user = new User(req.body);
+        const user = new User(req.body);
         const token = await user.generateAuthToken();
         const saved_user = await user.save();
 
         console.log(saved_user);
         return res.status(200).json({ user: saved_user, token });
-    } 
-    catch (e) {
+    } catch (e) {
         console.log(e);
         return res.status(400).json({ error: e.message });
     }
 });
 
-
-
 router.get("/user-detail", auth, async (req, res) => {
     try {
-        res.status(200).send(req.user)
-    }
-    catch (e) {
+        res.status(200).send(req.user);
+    } catch (e) {
         console.log(e);
         res.status(400).send(e);
     }
@@ -49,59 +45,65 @@ router.get("/scores", async (req, res) => {
         const topUsers = await User.find({})
             .sort({ total: -1 })
             .limit(50)
-            .select('-password -tokens'); // Avoid exposing sensitive fields
-
-        res.status(200).send(topUsers)
-    }
-    catch (e) {
+            .select('-password -tokens');
+        res.status(200).send(topUsers);
+    } catch (e) {
         console.log(e);
         res.status(400).send(e);
     }
 });
 
-
 router.post("/update-score", auth, async (req, res) => {
     try {
-        const user = await User.findOne({ email: req.email })
+        const user = await User.findOne({ email: req.email });
         console.log("Decoded email from token:", req.email);
         console.log("Authorization Header:", req.headers.authorization);
         if (!user) {
             return res.status(404).json({ Error: "User not found. Check if the token contains the correct email." });
         }
-        if (req.body.game === 'WDLE') {
-            var score = 6 - parseInt(req.body.score)
 
-            user.wordle.points += score
-            user.total += score
+        const { game, score: scoreStr, level: levelStr } = req.body;
+
+        if (!['WDLE', 'TETRIS', '2048', 'BKOUT'].includes(game)) {
+            return res.status(400).json({ error: "Invalid game type." });
         }
-        else if (req.body.game === 'TETRIS') {
-            var score = parseInt(req.body.score)
 
+        const score = parseInt(scoreStr, 10);
+        if (isNaN(score)) {
+            return res.status(400).json({ error: "Invalid score format." });
+        }
+
+        let level;
+        if (levelStr !== undefined) {
+            level = parseInt(levelStr, 10);
+            if (isNaN(level)) {
+                return res.status(400).json({ error: "Invalid level format." });
+            }
+        }
+
+        if (game === 'WDLE') {
+            user.wordle.points += 6 - score;
+            user.total += 6 - score;
+        } else if (game === 'TETRIS') {
             user.tetris.highScore = Math.max(user.tetris.highScore, score);
-            user.tetris.maxLevelReached = Math.max(user.tetris.maxLevelReached, parseInt(req.body.level))
-            user.tetris.points += score
-            user.total += score
-        }
-        else if (req.body.game === '2048') {
-            var score = parseInt(req.body.score)
-            console.log(score)
+            if(level !== undefined){
+                user.tetris.maxLevelReached = Math.max(user.tetris.maxLevelReached, level);
+            }
+            user.tetris.points += score;
+            user.total += score;
+        } else if (game === '2048') {
             user.tzfe.highScore = Math.max(user.tzfe.highScore, score);
-            user.tzfe.points += score
-            user.total += score
-        }
-        else if (req.body.game === 'BKOUT') {
-            var score = parseInt(req.body.score)
-
-            user.breakout.points += score
-            user.breakout.highScore = Math.max(score, user.breakout.highScore)
-            user.total += score
+            user.tzfe.points += score;
+            user.total += score;
+        } else if (game === 'BKOUT') {
+            user.breakout.points += score;
+            user.breakout.highScore = Math.max(score, user.breakout.highScore);
+            user.total += score;
         }
 
         const saved_user = await user.save();
-
-        res.status(200).send({ user: saved_user })
-    }
-    catch (e) {
+        res.status(200).send({ user: saved_user });
+    } catch (e) {
         console.log(e);
         res.status(400).send(e);
     }
