@@ -8,11 +8,19 @@ const isValidEmail = (email) => typeof email === 'string' && /^[^\s@]+@[^\s@]+\.
 
 router.post("/login", async (req, res) => {
     try {
-        const { email } = req.body;
+        
+        const rawEmail = req.body.email;
+
+        if (typeof rawEmail !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail)) {
+                return res.status(400).json({ error: "Invalid email format" });
+        }
+
+        const email = rawEmail.trim().toLowerCase();
         if (!isValidEmail(email)) {
             return res.status(400).json({ error: "Invalid email format" });
         }
         const user_exists = await User.findOne({ email });
+
 
         if (user_exists) {
             const existingToken = user_exists?.tokens?.length ? user_exists.tokens[0].token : null;
