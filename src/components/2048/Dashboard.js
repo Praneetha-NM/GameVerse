@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import Numbers from './Numbers';
+import PropTypes from 'prop-types';
+
+Dashboard.propTypes = {
+    dashboard: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+            PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.number
+            ])
+        )
+    ).isRequired
+};
+
 
 export default class Dashboard extends Component {
 	constructor(props) {
