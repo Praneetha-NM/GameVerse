@@ -84,7 +84,7 @@ export default class Game extends Component {
 
 	//Move all the zero to the left side of the row
 	moveCellsRight = (dashboard) => {
-		var auxDash = this.makeCopy(dashboard);
+		let auxDash = this.makeCopy(dashboard);
 		for (let i = 3; i >= 0; i--) {
 			let current = 3;
 			for (let j = 3; j >= 0; j--) {
