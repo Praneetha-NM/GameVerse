@@ -25,49 +25,42 @@
     let startEl = null;
 
     function handleTouchEnd(e) {
-
-        // if the user released on a different target, cancel!
         if (startEl !== e.target) return;
-
-        let swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
-        let swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
-        let timeDiff = Date.now() - timeDown;
-        let eventType = '';
-
-        if (Math.abs(xDiff) > Math.abs(yDiff)) { // most significant
-            if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
-                if (xDiff > 0) {
-                    eventType = 'swiped-left';
-                }
-                else {
-                    eventType = 'swiped-right';
-                }
-            }
-        }
-        else {
-            if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
-                if (yDiff > 0) {
-                    eventType = 'swiped-up';
-                }
-                else {
-                    eventType = 'swiped-down';
-                }
-            }
-        }
-
-        if (eventType !== '') {
-
-            // fire event on the element that started the swipe
+    
+        const swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);
+        const swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);
+        const timeDiff = Date.now() - timeDown;
+    
+        const eventType = getSwipeDirection({ xDiff, yDiff, swipeThreshold, swipeTimeout, timeDiff });
+    
+        if (eventType) {
             startEl.dispatchEvent(new CustomEvent(eventType, { bubbles: true, cancelable: true }));
         }
-
-        // reset values
+    
+        resetTouchData();
+    }
+    
+    function getSwipeDirection({ xDiff, yDiff, swipeThreshold, swipeTimeout, timeDiff }) {
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            return shouldTriggerSwipe(xDiff, swipeThreshold, timeDiff, swipeTimeout, 'left', 'right');
+        } else {
+            return shouldTriggerSwipe(yDiff, swipeThreshold, timeDiff, swipeTimeout, 'up', 'down');
+        }
+    }
+    
+    function shouldTriggerSwipe(diff, threshold, timeDiff, timeout, positive, negative) {
+        if (Math.abs(diff) > threshold && timeDiff < timeout) {
+            return diff > 0 ? `swiped-${positive}` : `swiped-${negative}`;
+        }
+        return '';
+    }
+    
+    function resetTouchData() {
         xDown = null;
         yDown = null;
         timeDown = null;
     }
-
-    function handleTouchStart(e) {
+        function handleTouchStart(e) {
 
         // if the element has data-swipe-ignore="true" we stop listening for swipe events
         if (e.target.getAttribute('data-swipe-ignore') === 'true') return;
