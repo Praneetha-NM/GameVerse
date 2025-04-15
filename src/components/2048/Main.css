@@ -388,7 +388,6 @@
     }
 
     .dashboard {
-        /* position: relative; */
         top: 5%;
         left: 5vw;
         width: 75vw;
@@ -527,15 +526,6 @@
         align-items: center;
     }
 }
-
-/* Custom, iPhone Retina */
-
-@media only screen and (max-width: 320px) {}
-
-@media print,
-(-o-min-device-pixel-ratio: 5/4),
-(-webkit-min-device-pixel-ratio: 1.25),
-(min-resolution: 120dpi) {}
 
 .scoring {
     display: flex; 
