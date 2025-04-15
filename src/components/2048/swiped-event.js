@@ -7,8 +7,7 @@
 
             params = params || { bubbles: false, cancelable: false, detail: undefined };
 
-            var evt = document.createEvent('CustomEvent');
-            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            let evt = document.createEvent('CustomEvent');
             return evt;
         };
 
@@ -19,22 +18,22 @@
     document.addEventListener('touchmove', handleTouchMove, false);
     document.addEventListener('touchend', handleTouchEnd, false);
 
-    var xDown = null;
-    var yDown = null;
-    var xDiff = null;
-    var yDiff = null;
-    var timeDown = null;
-    var startEl = null;
+    let xDown = null;
+    let yDown = null;
+    let xDiff = null;
+    let yDiff = null;
+    let timeDown = null;
+    let startEl = null;
 
     function handleTouchEnd(e) {
 
         // if the user released on a different target, cancel!
         if (startEl !== e.target) return;
 
-        var swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
-        var swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
-        var timeDiff = Date.now() - timeDown;
-        var eventType = '';
+        let swipeThreshold = parseInt(startEl.getAttribute('data-swipe-threshold') || '20', 10);    // default 10px
+        let swipeTimeout = parseInt(startEl.getAttribute('data-swipe-timeout') || '500', 10);      // default 1000ms
+        let timeDiff = Date.now() - timeDown;
+        let eventType = '';
 
         if (Math.abs(xDiff) > Math.abs(yDiff)) { // most significant
             if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
