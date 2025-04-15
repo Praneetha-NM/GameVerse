@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Hero from './Hero/Hero'
 import NavBar from './NavBar/NavBar'
 import './Main.css'
@@ -6,7 +6,6 @@ import bg from '../../assets/home/bg.png'
 import bg2 from '../../assets/home/GAMEVERSE.jpg'
 import Footer from './Footer/Footer'
 import Games from './Games/Games'
-import { useEffect } from 'react';
 import { Link,useNavigate } from 'react-router-dom'
 import useUserStore from '../../store/user';
 
@@ -65,7 +64,6 @@ const Main = () => {
         }
     };
     return (
-        <>
             <div className='container'
                 style={{ background: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(${bg})`,color:'white' }}>
                 {token ? (
@@ -93,7 +91,6 @@ const Main = () => {
                     </div>
                 )}
             </div>
-        </>
     )
 }
 

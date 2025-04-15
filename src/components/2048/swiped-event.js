@@ -5,7 +5,6 @@
 
         window.CustomEvent = function (event, params) {
 
-            params = params || { bubbles: false, cancelable: false, detail: undefined };
 
             let evt = document.createEvent('CustomEvent');
             return evt;
@@ -60,8 +59,6 @@
 
             // fire event on the element that started the swipe
             startEl.dispatchEvent(new CustomEvent(eventType, { bubbles: true, cancelable: true }));
-
-            // if (console && console.log) console.log(eventType + ' fired on ' + startEl.tagName);
         }
 
         // reset values

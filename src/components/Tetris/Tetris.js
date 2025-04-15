@@ -13,7 +13,7 @@ import UserStats from "./UserStats";
 const Tetris = ({ rows, columns, setGameOver, setLoading }) => {
     const [gameStats, addLinesCleared] = useGameStats();
     const [player, setPlayer, resetPlayer] = usePlayer();
-    const [board, setBoard] = useBoard({
+    const [board] = useBoard({
         rows,
         columns,
         player,
